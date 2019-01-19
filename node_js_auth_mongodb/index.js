@@ -102,16 +102,25 @@ MongoClient.connect(url, {useNewUrlParser: true}, function(err, client){
 
             //check for exisiting email
             db.collection('user')//created in MongoDB
+
                 .find({'email':email}).count(function(err, number){
-                    var salt = user.salt;//get salt
-                    var hashed_password = checkHashPassword(userPassword, salt).passwordHash; //hash password
-                    var encrypted_password = user.password; //get pass from user
-                    if (hashed_password == encrypted_password) { //authenticate
-                        response.json('Login Success');
-                        console.log('Login Success');
+                    if( number == 0){
+                        response.json('Email does not exist');
+                        console.log('Email does not exist');
                     } else {
-                        response.json('Wrong Password');
-                        console.log('Wrong Password');
+                        db.collection('user')
+                        .findOne({'email':email}), function(err, user) {
+                            var salt = user.salt;//get salt
+                            var hashed_password = checkHashPassword(userPassword, salt).passwordHash; //hash password
+                            var encrypted_password = user.password; //get pass from user
+                            if (hashed_password == encrypted_password) { //authenticate
+                                response.json('Login Success');
+                                console.log('Login Success');
+                            } else {
+                                response.json('Wrong Password');
+                                console.log('Wrong Password');
+                            }
+                        }
                     }
 
                 });
