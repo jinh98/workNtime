@@ -109,7 +109,7 @@ MongoClient.connect(url, {useNewUrlParser: true}, function(err, client){
                         console.log('Email does not exist');
                     } else {
                         db.collection('user')
-                        .findOne({'email':email}), function(err, user) {
+                        .findOne({'email':email}, function(err, user) {
                             var salt = user.salt;//get salt
                             var hashed_password = checkHashPassword(userPassword, salt).passwordHash; //hash password
                             var encrypted_password = user.password; //get pass from user
@@ -120,7 +120,7 @@ MongoClient.connect(url, {useNewUrlParser: true}, function(err, client){
                                 response.json('Wrong Password');
                                 console.log('Wrong Password');
                             }
-                        }
+                        })
                     }
 
                 });
