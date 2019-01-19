@@ -85,11 +85,16 @@ MongoClient.connect(url, {useNewUrlParser: true}, function(err, client){
                         db.collection('user')
                             .insertOne(insertJson, function(error, res){
                                 response.json('Registration Successful')
-                            console.log();
+                                console.log('Registration Successful');
                             })
                     }
                 });
-        })
+        });
+
+        //login stuff
+
+
+        //login stuff
 
 
 
