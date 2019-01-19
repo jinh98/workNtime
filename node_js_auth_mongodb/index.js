@@ -107,21 +107,13 @@ MongoClient.connect(url, {useNewUrlParser: true}, function(err, client){
                     var hashed_password = checkHashPassword(user, password, salt).passwordHash; //hash password
                     var encrypted_password = user.password; //get pass from user
                     if (hashed_password == encrypted_password) { //authenticate
-
+                        response.json('Login Success');
+                        console.log('Login Success');
+                    } else {
+                        response.json('Wrong Password');
+                        console.log('Wrong Password');
                     }
 
-                    //in the mongo db collection check for duplicate emails before normalization
-                    if (number != 0){
-                        response.json('Email already exists')
-                        console.log('Email already exists');
-                    }
-                    else{
-                        db.collection('user')
-                            .insertOne(insertJson, function(error, res){
-                                response.json('Registration Successful')
-                                console.log('Registration Successful');
-                            })
-                    }
                 });
         });
 
