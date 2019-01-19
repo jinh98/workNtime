@@ -53,11 +53,11 @@ MongoClient.connect(url, {useNewUrlParser: true}, function(err, client){
         console.log('Failed to connect to MongoDB server.Error', err); //error message when failed to connect
     }else{
         //register stuff
-        app.post('/register', (request, reponse, next)=>{
+        app.post('/register', (request, response, next) => {
             var post_data = request.body; //request 
 
-            var plaint_password = post.data.password;
-            var hash_Data = saltHashPassword(plaint_password);//hash the password into a random salt
+            var plaint_password = post_data.password;
+            var hash_data = saltHashPassword(plaint_password);//hash the password into a random salt
         
             var password = hash_data.passwordHash;
             var salt = hash_data.salt;
@@ -70,10 +70,10 @@ MongoClient.connect(url, {useNewUrlParser: true}, function(err, client){
                 'salt':salt,
                 'name':name
             };
-            var db = client.db("edmtdevnode.js")//subject to change later this is the database
+            var db = client.db('edmtdevnode.js')//subject to change later this is the database
 
             //check exisiting email
-            db.collection('user')//created in MongoDB
+            db.collection('user')//created in MongoDB (already created)
                 .find({'email':email}).count(function(err, number){
 
                     //in the mongo db collection check for duplicate emails before normalization
