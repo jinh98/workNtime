@@ -70,7 +70,7 @@ MongoClient.connect(url, {useNewUrlParser: true}, function(err, client){
                 'salt':salt,
                 'name':name
             };
-            var db = client.db('edmtdevnode.js')//subject to change later this is the database
+            var db = client.db('edmtdevnodejs')//subject to change later this is the database
 
             //check exisiting email
             db.collection('user')//created in MongoDB (already created)
@@ -92,7 +92,7 @@ MongoClient.connect(url, {useNewUrlParser: true}, function(err, client){
         });
 
         //login stuff
-        app.post('/login', (request, reponse, next)=>{
+        app.post('/login', (request, response, next)=>{
             var post_data = request.body; //request 
 
             var email = post_data.email;
