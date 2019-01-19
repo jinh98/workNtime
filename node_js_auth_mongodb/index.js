@@ -50,8 +50,53 @@ var url = 'mongodb://localhost:27017'
 
 MongoClient.connect(url, {useNewUrlParser: true}, function(err, client){
     if(err){
-        console.log('Failed to connect to MongoDB server.Error', err);
+        console.log('Failed to connect to MongoDB server.Error', err); //error message when failed to connect
     }else{
+        //register stuff
+        app.post('/register', (request, reponse, next)=>{
+            var post_data = request.body; //request 
+
+            var plaint_password = post.data.password;
+            var hash_Data = saltHashPassword(plaint_password);//hash the password into a random salt
+        
+            var password = hash_data.passworHash;
+            var salt = hash_data.salt;
+
+            var name = post_data.name;
+            var email = post_data.email;
+            var insertJson = {
+                'email': email,
+                'password': password,
+                'salt':salt,
+                'name':name
+            };
+            var db = client.db("edmtdevnode.js")//subject to change later this is the data base
+
+            //check exisiting email
+            db.collection('user')//created in MongoDB
+                .find({'email':email}).count(function(err, number){
+
+                    //in the mongo db collection check if the number of email are duplicate before normalization
+                    if (number!=0){
+                        response.json('Email already exists')
+                        console.log('Email already exists');
+                    }
+                    else{
+                        db.collection('user')
+                            .insertOne(insertJson, function(error, res){
+                                response.json('Registration Successful')
+                            console.log();
+                            })
+                    }
+                });
+        })
+
+
+
+
+
+
+
         //start web server
         app.listen(3000, ()=>{
             console.log('Connected to the MongoDB server, Port: 3000');
