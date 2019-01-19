@@ -59,7 +59,7 @@ MongoClient.connect(url, {useNewUrlParser: true}, function(err, client){
             var plaint_password = post.data.password;
             var hash_Data = saltHashPassword(plaint_password);//hash the password into a random salt
         
-            var password = hash_data.passworHash;
+            var password = hash_data.passwordHash;
             var salt = hash_data.salt;
 
             var name = post_data.name;
@@ -70,14 +70,14 @@ MongoClient.connect(url, {useNewUrlParser: true}, function(err, client){
                 'salt':salt,
                 'name':name
             };
-            var db = client.db("edmtdevnode.js")//subject to change later this is the data base
+            var db = client.db("edmtdevnode.js")//subject to change later this is the database
 
             //check exisiting email
             db.collection('user')//created in MongoDB
                 .find({'email':email}).count(function(err, number){
 
-                    //in the mongo db collection check if the number of email are duplicate before normalization
-                    if (number!=0){
+                    //in the mongo db collection check for duplicate emails before normalization
+                    if (number != 0){
                         response.json('Email already exists')
                         console.log('Email already exists');
                     }
@@ -92,7 +92,38 @@ MongoClient.connect(url, {useNewUrlParser: true}, function(err, client){
         });
 
         //login stuff
+        app.post('/lo', (request, reponse, next)=>{
+            var post_data = request.body; //request 
 
+            var email = post_data.email;
+            var userPassword= post_data.password;
+
+            var db = client.db('edmtdevnodejs');
+
+            //check for exisiting email
+            db.collection('user')//created in MongoDB
+                .find({'email':email}).count(function(err, number){
+                    var salt = user.salt;//get salt
+                    var hashed_password = checkHashPassword(user, password, salt).passwordHash; //hash password
+                    var encrypted_password = user.password; //get pass from user
+                    if (hashed_password == encrypted_password) { //authenticate
+
+                    }
+
+                    //in the mongo db collection check for duplicate emails before normalization
+                    if (number != 0){
+                        response.json('Email already exists')
+                        console.log('Email already exists');
+                    }
+                    else{
+                        db.collection('user')
+                            .insertOne(insertJson, function(error, res){
+                                response.json('Registration Successful')
+                                console.log('Registration Successful');
+                            })
+                    }
+                });
+        });
 
         //login stuff
 
