@@ -92,7 +92,7 @@ MongoClient.connect(url, {useNewUrlParser: true}, function(err, client){
         });
 
         //login stuff
-        app.post('/lo', (request, reponse, next)=>{
+        app.post('/login', (request, reponse, next)=>{
             var post_data = request.body; //request 
 
             var email = post_data.email;
@@ -116,14 +116,6 @@ MongoClient.connect(url, {useNewUrlParser: true}, function(err, client){
 
                 });
         });
-
-        //login stuff
-
-
-
-
-
-
 
         //start web server
         app.listen(3000, ()=>{
