@@ -20,7 +20,7 @@ var sha512 = function(password, salt){
     var value = hash.digest('hex');
     return {
         salt : salt,
-        password : value
+        passwordHash : value
     };
 };
 
@@ -96,7 +96,7 @@ MongoClient.connect(url, {useNewUrlParser: true}, function(err, client){
             var post_data = request.body; //request 
 
             var email = post_data.email;
-            var userPassword= post_data.password;
+            var userPassword = post_data.password;
 
             var db = client.db('edmtdevnodejs');
 
@@ -112,6 +112,8 @@ MongoClient.connect(url, {useNewUrlParser: true}, function(err, client){
                         .findOne({'email':email}, function(err, user) {
                             var salt = user.salt;//get salt
                             var hashed_password = checkHashPassword(userPassword, salt).passwordHash; //hash password
+                            console.log(encrypted_password);
+                            console.log(hashed_password);
                             var encrypted_password = user.password; //get pass from user
                             if (hashed_password == encrypted_password) { //authenticate
                                 response.json('Login Success');
