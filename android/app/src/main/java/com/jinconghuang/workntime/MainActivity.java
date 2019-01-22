@@ -19,6 +19,7 @@ import com.jinconghuang.workntime.Retrofit.IMyService;
 import com.jinconghuang.workntime.Retrofit.RetrofitClient;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
+import java.util.NoSuchElementException;
 import java.util.function.Consumer;
 
 import io.reactivex.Scheduler;
@@ -123,8 +124,9 @@ public class MainActivity extends AppCompatActivity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<String>() {
                     @Override
-                    public void accept(String response) throws Exception {
-                        Toast.makeText(MainActivity.this, "" + response, Toast.LENGTH_SHORT).show();
+                    public void accept(String response) throws Exception{
+                            Toast.makeText(MainActivity.this,"" +response,Toast.LENGTH_SHORT).show();
+
                     }
                 }));
     }
