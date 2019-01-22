@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loginUser(edt_login_email.getText().toString(), edt_login_password.getText().toString())
+                loginUser(edt_login_email.getText().toString(), edt_login_password.getText().toString());
             }
         });
 
