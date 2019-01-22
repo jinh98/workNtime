@@ -15,7 +15,7 @@ public class RetrofitClient {
                     .addConverterFactory(ScalarsConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .build();
-        retrofit instance;
+        return instance;
     }
 
 
