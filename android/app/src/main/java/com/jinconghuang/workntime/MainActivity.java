@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         //init view
         edt_login_email = (MaterialEditText)findViewById(R.id.edt_email);
         edt_login_password = (MaterialEditText)findViewById(R.id.edt_password);
-        btn_login = (Button) (MaterialEditText)findViewById(R.id.btn_password);
+        btn_login = (Button) findViewById(R.id.btn_password);
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,15 +61,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        txt_create_account = (TextView)findViewById(R.id.text_create_account);
-        txt_create_account.setOnClickListener(new View.onClickListener() {
+        txt_create_account = (TextView)findViewById(R.id.txt_create_account);
+        txt_create_account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final View register_layout = LayoutInflater.from(MainActivity.this)
                         .inflate(R.layout.register_layout, null);
 
                 new MaterialStyledDialog.Builder(MainActivity.this)
-                        .setIcon(R.drawable.ic_user)
+                        .setIcon(R.drawable.ic_name)
                         .setTitle("REGISTRATION")
                         .setDescription("Please fill out all fields")
                         .setCustomView(register_layout)
@@ -108,9 +108,9 @@ public class MainActivity extends AppCompatActivity {
                                         edt_register_name.getText().toString(),
                                         edt_register_password.getText().toString());
                             }
-                        })
+                        });
             }
-        }
+        });
 
     }
 
@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
         compositeDisposable.add(iMyService.registerUser(email, name, password)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<String>(){
+                .subscribe(new Consumer<String>() {
                     @Override
                     public void accept(String response) throws Exception {
                         Toast.makeText(MainActivity.this, "" + response, Toast.LENGTH_SHORT).show();
