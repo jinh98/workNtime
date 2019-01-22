@@ -118,7 +118,12 @@ public class MainActivity extends AppCompatActivity {
         compositeDisposable.add(iMyService.registerUser(email, name, password)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe());
+                .subscribe(new io.reactivex.functions.Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws Exception {
+                        Toast.makeText(MainActivity.this, ""+s, Toast.LENGTH_SHORT).show();
+                    }
+                }));
     }
 
     private void loginUser(String email, String password) {
@@ -135,7 +140,12 @@ public class MainActivity extends AppCompatActivity {
         compositeDisposable.add(iMyService.loginUser(email, password)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
-        .subscribe( ));
+        .subscribe(new io.reactivex.functions.Consumer<String>() {
+            @Override
+            public void accept(String s) throws Exception {
+                Toast.makeText(MainActivity.this, ""+s, Toast.LENGTH_SHORT).show();
+            }
+        }));
 
 
 
