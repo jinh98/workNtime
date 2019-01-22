@@ -147,10 +147,10 @@ public class MainActivity extends AppCompatActivity {
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new Consumer<String>(){
-            @Override
-            public void accept(String response) throws Exception {
-                Toast.makeText(MainActivity.this, "" + response, Toast.LENGTH_SHORT).show();
-            }
+                @Override
+                public void accept(String response) {
+                    Toast.makeText(MainActivity.this, "" + response, Toast.LENGTH_SHORT).show();
+                }
         }));
 
 
