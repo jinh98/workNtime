@@ -1,6 +1,8 @@
 package com.jinconghuang.workntime;
 
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -114,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void registerUser(String email, String name, String password) {
         compositeDisposable.add(iMyService.registerUser(email, name, password)
                 .subscribeOn(Schedulers.io())
@@ -126,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
                 }));
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void loginUser(String email, String password) {
         if(TextUtils.isEmpty(email)) {
             Toast.makeText(this, "Email cannot be null or empty", Toast.LENGTH_SHORT).show();
