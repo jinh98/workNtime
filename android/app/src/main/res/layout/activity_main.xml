@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="4"
+    android:background="@drawable/office"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -21,11 +22,11 @@
             android:layout_weight="2"
             android:visibility="visible">
         
-            <ImageView
-                android:src="@drawable/kurisu48"
-                android:scaleType="fitXY"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+            <!--<ImageView-->
+                <!--android:src="@drawable/space"-->
+                <!--android:scaleType="fitXY"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent" />-->
             
             <TextView
                 android:id="@+id/txt_create_account"
