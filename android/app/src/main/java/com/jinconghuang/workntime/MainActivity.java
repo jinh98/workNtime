@@ -1,6 +1,8 @@
 package com.jinconghuang.workntime;
 
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -17,6 +19,7 @@ import com.jinconghuang.workntime.Retrofit.IMyService;
 import com.jinconghuang.workntime.Retrofit.RetrofitClient;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
+import java.util.NoSuchElementException;
 import java.util.function.Consumer;
 
 import io.reactivex.Scheduler;
@@ -114,18 +117,26 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void registerUser(String email, String name, String password) {
         compositeDisposable.add(iMyService.registerUser(email, name, password)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new io.reactivex.functions.Consumer<String>() {
                     @Override
+<<<<<<< HEAD
                     public void accept(String s) throws Exception {
                         Toast.makeText(MainActivity.this, ""+s, Toast.LENGTH_SHORT).show();
+=======
+                    public void accept(String response) throws Exception{
+                            Toast.makeText(MainActivity.this,"" +response,Toast.LENGTH_SHORT).show();
+
+>>>>>>> fc51c6243682b1fb6c721518a62296c99a0c4fec
                     }
                 }));
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void loginUser(String email, String password) {
         if(TextUtils.isEmpty(email)) {
             Toast.makeText(this, "Email cannot be null or empty", Toast.LENGTH_SHORT).show();
@@ -140,11 +151,19 @@ public class MainActivity extends AppCompatActivity {
         compositeDisposable.add(iMyService.loginUser(email, password)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
+<<<<<<< HEAD
         .subscribe(new io.reactivex.functions.Consumer<String>() {
             @Override
             public void accept(String s) throws Exception {
                 Toast.makeText(MainActivity.this, ""+s, Toast.LENGTH_SHORT).show();
             }
+=======
+        .subscribe(new Consumer<String>(){
+                @Override
+                public void accept(String response) {
+                    Toast.makeText(MainActivity.this, "" + response, Toast.LENGTH_SHORT).show();
+                }
+>>>>>>> fc51c6243682b1fb6c721518a62296c99a0c4fec
         }));
 
 
