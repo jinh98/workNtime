@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         edt_login_password = (MaterialEditText)findViewById(R.id.edt_password);
         btn_login = (Button) findViewById(R.id.btn_password);
         btn_login.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
                 loginUser(edt_login_email.getText().toString(), edt_login_password.getText().toString());
@@ -85,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
                         })
                         .setPositiveText("REGISTER")
                         .onPositive(new MaterialDialog.SingleButtonCallback() {
+                            @RequiresApi(api = Build.VERSION_CODES.N)
                             @Override
                             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
 
@@ -124,14 +126,9 @@ public class MainActivity extends AppCompatActivity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new io.reactivex.functions.Consumer<String>() {
                     @Override
-<<<<<<< HEAD
                     public void accept(String s) throws Exception {
                         Toast.makeText(MainActivity.this, ""+s, Toast.LENGTH_SHORT).show();
-=======
-                    public void accept(String response) throws Exception{
-                            Toast.makeText(MainActivity.this,"" +response,Toast.LENGTH_SHORT).show();
 
->>>>>>> fc51c6243682b1fb6c721518a62296c99a0c4fec
                     }
                 }));
     }
@@ -151,20 +148,13 @@ public class MainActivity extends AppCompatActivity {
         compositeDisposable.add(iMyService.loginUser(email, password)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
-<<<<<<< HEAD
+
         .subscribe(new io.reactivex.functions.Consumer<String>() {
             @Override
             public void accept(String s) throws Exception {
                 Toast.makeText(MainActivity.this, ""+s, Toast.LENGTH_SHORT).show();
             }
-=======
-        .subscribe(new Consumer<String>(){
-                @Override
-                public void accept(String response) {
-                    Toast.makeText(MainActivity.this, "" + response, Toast.LENGTH_SHORT).show();
-                }
->>>>>>> fc51c6243682b1fb6c721518a62296c99a0c4fec
-        }));
+            }));
 
 
 
