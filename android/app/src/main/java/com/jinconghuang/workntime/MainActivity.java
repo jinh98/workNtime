@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 loginUser(edt_login_email.getText().toString(), edt_login_password.getText().toString());
             }
         });
@@ -113,7 +113,8 @@ public class MainActivity extends AppCompatActivity {
                                         edt_register_name.getText().toString(),
                                         edt_register_password.getText().toString());
                             }
-                        });
+                        }).show();
+
             }
         });
 
@@ -144,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Password cannot be null or empty", Toast.LENGTH_SHORT).show();
             return;
         }
+
 
         compositeDisposable.add(iMyService.loginUser(email, password)
         .subscribeOn(Schedulers.io())
