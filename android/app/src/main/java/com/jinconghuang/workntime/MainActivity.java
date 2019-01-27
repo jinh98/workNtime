@@ -156,11 +156,13 @@ public class MainActivity extends AppCompatActivity {
         .subscribe(new io.reactivex.functions.Consumer<String>() {
             @Override
             public void accept(String s) throws Exception {
+                if ((s+"").equalsIgnoreCase("\"Login Success\"")){
+                    openTimerActivity();
+                }
                 Toast.makeText(MainActivity.this, ""+s, Toast.LENGTH_SHORT).show();
             }
             }));
 
-        openTimerActivity();
 
     }
 
