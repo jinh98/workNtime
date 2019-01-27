@@ -160,12 +160,12 @@ public class MainActivity extends AppCompatActivity {
             }
             }));
 
-        openTimeActivity();
+        openTimerActivity();
 
     }
 
-    public void openTimeActivity(){
-        Intent intent = new Intent(this, TimeActivity.class);
+    public void openTimerActivity(){
+        Intent intent = new Intent(this, TimerActivity.class);
         startActivity(intent);
     }
 }
