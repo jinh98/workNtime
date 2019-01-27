@@ -1,5 +1,9 @@
 package com.jinconghuang.workntime;
 
+import android.app.NotificationManager;
+import android.content.Context;
+import android.content.Intent;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.SharedPreferences;
@@ -33,6 +37,8 @@ public class TimerActivity extends AppCompatActivity {
     private long mTimeElapsedInMillis;
     private long mTotalTimeInMillis;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //mTotalTimeInMillis = getData();
@@ -46,6 +52,17 @@ public class TimerActivity extends AppCompatActivity {
         mButtonSet = findViewById(R.id.button_set);
         mButtonStartPause = findViewById(R.id.button_start_pause);
         mButtonReset = findViewById(R.id.button_reset);
+
+        //test alert
+        mTextViewCountDown.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                alertUser();
+            }
+        });
+
+
+
 
         mButtonSet.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,6 +101,7 @@ public class TimerActivity extends AppCompatActivity {
                 resetTimer();
             }
         });
+
     }
 
     private void setTime(long milliseconds) {
@@ -126,6 +144,21 @@ public class TimerActivity extends AppCompatActivity {
         updateCountDownText();
         updateWatchInterface();
     }
+
+    public void alertUser(){
+        final String uniqueId ="420";
+        NotificationCompat.Builder notification = (NotificationCompat.Builder) new NotificationCompat.Builder(this, uniqueId)
+            .setSmallIcon(R.drawable.ic_name)
+            .setWhen(System.currentTimeMillis())
+            .setContentTitle("YOUR WORK IS NOT DONE YET")
+            .setContentTitle("Click to resume");
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(1, notification.build());
+
+        Toast.makeText(TimerActivity.this, "Large Gay", Toast.LENGTH_SHORT).show();
+    }
+
 
     private void updateCountDownText() {
         mTimeElapsedInMillis = mStartTimeInMillis - mTimeLeftInMillis;
