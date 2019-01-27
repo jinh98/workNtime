@@ -1,5 +1,6 @@
 package com.jinconghuang.workntime;
 
+import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
@@ -19,6 +20,7 @@ import com.jinconghuang.workntime.Retrofit.IMyService;
 import com.jinconghuang.workntime.Retrofit.RetrofitClient;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
+import java.sql.Time;
 import java.util.NoSuchElementException;
 import java.util.function.Consumer;
 
@@ -158,7 +160,12 @@ public class MainActivity extends AppCompatActivity {
             }
             }));
 
+        openTimeActivity();
 
+    }
 
+    public void openTimeActivity(){
+        Intent intent = new Intent(this, TimeActivity.class);
+        startActivity(intent);
     }
 }
