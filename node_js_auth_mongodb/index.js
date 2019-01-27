@@ -5,6 +5,8 @@ var crypto = require('crypto');
 var express = require('express');
 var bodyParser = require('body-parser');
 
+var port = process.env.PORT || 3000;
+
 
 //password stuff
 
@@ -129,7 +131,7 @@ MongoClient.connect(url, {useNewUrlParser: true}, function(err, client){
         });
 
         //start web server
-        app.listen(3000, ()=>{
+        app.listen(port, ()=>{
             console.log('Connected to the MongoDB server, Port: 3000');
         })
     }
