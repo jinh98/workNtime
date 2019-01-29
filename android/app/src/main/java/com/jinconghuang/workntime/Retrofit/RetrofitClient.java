@@ -11,7 +11,7 @@ public class RetrofitClient {
     public static Retrofit getInstance() {
         if (instance == null)
             instance = new Retrofit.Builder()
-                    .baseUrl("http://10.0.2.2:3000/") //in emulator, change localhost to 10.0.2.2 (so you can use host-based database)
+                    .baseUrl("https://mighty-falls-97073.herokuapp.com/") //in emulator, change localhost to 10.0.2.2 (so you can use host-based database)
                     .addConverterFactory(ScalarsConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .build();

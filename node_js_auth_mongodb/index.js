@@ -1,5 +1,21 @@
 //Import packages installed from npm
 var mongodb = require('mongodb');
+
+// var MongoClient = mongodb.MongoClient;
+// var url = 'mongodb://<dbuser>:<dbpassword>@ds113845.mlab.com:13845/work-n-time';
+
+// MongoClient.connect(url, function (err, db) {
+//     if (err) {
+//       console.log('Unable to connect to the mongoDB server. Error:', err);
+//     } else {
+//       console.log('Connection established to', url);
+  
+//       // do some work here with the database.
+  
+//       //Close connection
+//       db.close();
+//     }
+// });
 var ObjectId = mongodb.ObjectID;
 var crypto = require('crypto');
 var express = require('express');
@@ -48,7 +64,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 var MongoClient = mongodb.MongoClient;
 
 //connection 
-var url = 'mongodb://localhost:27017'
+// var url = 'mongodb://localhost:27017'
+var url = 'mongodb://regular:passw0rd@ds113845.mlab.com:13845/work-n-time';
 
 MongoClient.connect(url, {useNewUrlParser: true}, function(err, client){
     if(err){
@@ -72,7 +89,7 @@ MongoClient.connect(url, {useNewUrlParser: true}, function(err, client){
                 'salt':salt,
                 'name':name
             };
-            var db = client.db('edmtdevnodejs')//subject to change later this is the database
+            var db = client.db('work-n-time')//subject to change later this is the database
 
             //check exisiting email
             db.collection('user')//created in MongoDB (already created)
@@ -100,7 +117,7 @@ MongoClient.connect(url, {useNewUrlParser: true}, function(err, client){
             var email = post_data.email;
             var userPassword = post_data.password;
 
-            var db = client.db('edmtdevnodejs');
+            var db = client.db('work-n-time');
 
             //check for exisiting email
             db.collection('user')//created in MongoDB
@@ -132,7 +149,7 @@ MongoClient.connect(url, {useNewUrlParser: true}, function(err, client){
 
         //start web server
         app.listen(port, ()=>{
-            console.log('Connected to the MongoDB server, Port: 3000');
+            console.log('Connected to the MongoDB mLab server');
         })
     }
 });
