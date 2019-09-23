@@ -10,4 +10,4 @@ Login information salt-hashed and stored in MongoDB, hosted on mLabs
 
 App written in Java using Android Studio
 
-https://github.com/jinh98/workNtime/blob/master/Demo/1.jpg?raw=true
+![alt text](https://github.com/jinh98/workNtime/blob/master/Demo/1.jpg?raw=true)
